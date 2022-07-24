@@ -2,10 +2,7 @@
   "name": "scratch-map",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development"
+    "dev": "ng serve"
   },
   "private": true,
   "dependencies": {
@@ -17,6 +14,8 @@
     "@angular/platform-browser": "^14.1.0",
     "@angular/platform-browser-dynamic": "^14.1.0",
     "@angular/router": "^14.1.0",
+    "@turf/turf": "^6.5.0",
+    "leaflet": "^1.8.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -25,6 +24,7 @@
     "@angular-devkit/build-angular": "^14.1.0",
     "@angular/cli": "~14.1.0",
     "@angular/compiler-cli": "^14.1.0",
+    "@types/leaflet": "^1.7.11",
     "typescript": "~4.7.2"
   }
 }
