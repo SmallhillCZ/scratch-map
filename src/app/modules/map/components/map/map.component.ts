@@ -15,7 +15,18 @@ import { GeoJSON, Map, MapOptions, TileLayer } from "leaflet";
 })
 export class MapComponent implements OnInit, AfterViewInit {
   map!: Map;
-  scratchLayer!: GeoJSON;
+
+  scratchLayer = new GeoJSON(undefined, {
+    style: {
+      stroke: false,
+      color: "#000",
+      opacity: 0.5,
+      weight: 1,
+      fill: true,
+      fillOpacity: 1,
+      fillColor: "#000",
+    },
+  });
 
   constructor() {}
 
@@ -25,7 +36,9 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.map = new Map(this.mapEl.nativeElement);
+
     this.map.on("load", () => this.loadGrid());
+    this.map.on("moveend", () => this.loadGrid());
 
     this.map.setView([55.67, 12.56], 14);
 
@@ -39,14 +52,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     );
 
     tiles.addTo(this.map);
-
-    this.scratchLayer = new GeoJSON(undefined, {
-      style: { stroke: false, fill: true, fillOpacity: 1, fillColor: "#333" },
-    });
     this.scratchLayer.addTo(this.map);
-
-    // this.map.on("dragend", () => this.loadGrid(true));
-    // this.map.on("zoomend", () => this.loadGrid(true));
   }
 
   async loadGrid() {
@@ -59,13 +65,11 @@ export class MapComponent implements OnInit, AfterViewInit {
       bounds.getNorth(),
     ];
 
-    const grid = turf.hexGrid(bbox, 50, {
-      units: "meters",
-      properties: { stroke: 0 },
-    });
-    grid.features = grid.features.filter((feature) => Math.random() > 0.5);
+    const grid = turf.hexGrid(bbox, 50, { units: "meters" });
+    grid.features = grid.features.filter((feature) => Math.random() > 0.1);
 
-    const mask = turf.mask(grid);
+    const isolatedGrid = turf.transformScale(grid, 0.9999);
+    const mask = turf.mask(isolatedGrid);
 
     this.scratchLayer.clearLayers();
     this.scratchLayer.addData(mask);

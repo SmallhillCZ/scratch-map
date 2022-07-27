@@ -21,7 +21,11 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "types": ["wicg-file-system-access","json"],
+    "typeRoots": [
+      "node_modules/@types",
+    ],
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
