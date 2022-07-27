@@ -1,0 +1,15 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.241.1/containers/typescript-node
+{
+  "name": "Node Devcontainer",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "forwardPorts": [4200],
+  "extensions": [
+    "angular.ng-template",
+    "esbenp.prettier-vscode",
+    "wayou.vscode-todo-highlight",
+    "github.copilot"
+  ]
+}
