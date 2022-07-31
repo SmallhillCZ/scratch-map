@@ -2,6 +2,7 @@
   "name": "scratch-map",
   "version": "0.0.0",
   "scripts": {
+    "build": "ng build",
     "dev": "ng serve"
   },
   "private": true,
